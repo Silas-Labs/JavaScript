@@ -1,0 +1,14 @@
+@import "./styles/blog.css";
+
+
+.App{
+  width: 100%;
+  max-width: 800px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  align-content: center;
+  
+}
