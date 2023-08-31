@@ -12,15 +12,17 @@ import "./bootstrap/js/bootstrap.js";
 function App() {
   const API_URL = "http://localhost:3000/items";
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("shoppinglist")) || []
+  );
   const [newItem, setNewItem] = useState("");
   const [searchItem, setSearchItem] = useState("");
   const [fetchError, setFetchError] = useState("");
   const [fetchErrorDetails, setFetchErrorDetails] = useState("");
 
   useEffect(() => {
-    const item = JSON.parse(localStorage.getItem("shoppinglist"));
-    setItems(item);
+    const list = JSON.parse(localStorage.getItem("shoppinglist"));
+    setItems(list);
   }, []);
 
   const onSubmit = (e) => {
