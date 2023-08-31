@@ -8,8 +8,8 @@
     color: rgba(255, 255, 255, 0.87);
     background-color: white;
     margin: 5px;
-    max-width: calc(100%-10px);
-    min-width: calc(100%-10px);
+    max-width: calc(100% - 10px);
+    min-width: calc(100% - 10px);
   
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -93,14 +93,14 @@
     flex-direction: column;
     justify-content: left;
     height: calc(100% - 2px);
-    min-width: calc(50%- 2px);
+    min-width: calc(50% - 2px);
     max-width: calc(600px - 2px);
     width: calc(100% - 2px);
     border: 1px solid mediumblue;
     
   }
   main{
-    width: calc(100%-2px);
+    width: calc(100% - 2px);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
