@@ -17,6 +17,11 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
   }
+  #root{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
   h1 {
     font-size: 3.2em;
@@ -158,6 +163,7 @@
     background-color: mediumblue;
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   
   }
 
 
