@@ -1,0 +1,51 @@
+.jsonplaceholder{
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 2px);
+    height: calc(5%);
+}
+.json-button{
+    width: calc(100% / 3);
+      
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 1px;
+    height: calc(90%);
+    min-height: calc(50%);
+    width:calc(100% - 2px);
+    padding-left: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifs
+}
+li{
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+.sticky{
+    width: calc(100%);
+    position: fixed;
+    
+}
+.error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #af060f;
+}
+a{
+    cursor: pointer;
+    color: blue;
+}
+.accordion-button:hover{
+background-color: cornsilk;
+}
+table{
+	border-color: inherit;
+	border-style: solid;
+	border-width: thin;
+}
+tr{
+    border: 1px, solid, black;
+}
