@@ -2,7 +2,7 @@
   "name": "blog",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Silas-Labs.github.io/JavaScript/React/Projects/Blog",
+  "homepage": ".",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",

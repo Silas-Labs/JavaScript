@@ -4,7 +4,7 @@ import Feed from "./Feed";
 const Home = ({ posts, fetchError }) => {
   return (
     <main>
-      {!fetchError ? (
+      {!fetchError || posts ? (
         posts.length ? (
           <Feed posts={posts} />
         ) : (
