@@ -1,12 +1,13 @@
 {
-  "name": "shoppinglist",
+  "name": "react-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage":".",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
