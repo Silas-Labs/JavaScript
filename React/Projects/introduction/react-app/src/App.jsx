@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 import AddItem from "./components/AddItem.jsx";
 import apiRequest from "./components/apiRequest.jsx";
 
-import "./bootstrap/css/bootstrap.css";
-import "./bootstrap/js/bootstrap.js";
+import bootstrapBundle from "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./bootstrap/css/bootstrap.min.css";
+import "./bootstrap/js/bootstrap.min.js";
 
 function App() {
   const API_URL = "http://localhost:3000/items";
