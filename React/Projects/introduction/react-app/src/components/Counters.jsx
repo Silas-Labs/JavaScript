@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Counter from "counter";
+import Counter from "./Counter.jsx";
 
 class Counters extends Component {
   render() {
