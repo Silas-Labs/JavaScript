@@ -4,14 +4,12 @@
   align-items: start;
     max-width: calc(100%);
     max-height: calc(100%);
-    margin: 0;
   }
 
 .header{
-  padding-left: 5px;
-  width: 100%;
+  width: calc(100%);
   background-color: darkolivegreen;
-  height: fit-content;
+  margin-bottom: 5px;
 }
 #icon{
   float: right;
@@ -35,8 +33,14 @@
   align-items: left;
 }
 .navbar{
+  display: flex;
+  flex-direction: column;
   width: calc(100%);
   align-content: center;
+}
+.nav-link-content{
+  display: flex;
+  align-items: center;
 }
 .navbar-li{
   min-width: auto;
@@ -54,10 +58,9 @@
   padding-left: 3px;
 }
 #search{
-  margin-top: 2px;
-  width: calc(80%);
+  width: calc(100%);
   min-height: 40px;
-  font-size: 1.2rem;;
+  font-size: 1.25rem;
 }
 
 #new-post{

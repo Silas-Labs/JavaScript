@@ -11,17 +11,19 @@ const Nav = ({ search, setSearch }) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <ul className="navbar-link">
-        <li className="navbar-li">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="navbar-li">
-          <Link to="/posts">Posts</Link>
-        </li>
-        <li className="navbar-li">
-          <Link to="/about">About</Link>
-        </li>
-      </ul>
+      <div className="nav-link-content">
+        <ul className="navbar-link">
+          <li className="navbar-li">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="navbar-li">
+            <Link to="/posts">Posts</Link>
+          </li>
+          <li className="navbar-li">
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };
