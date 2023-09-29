@@ -29,11 +29,11 @@ const EditPost = ({
             <h2>Edit Post</h2>
             <input
               id="post-title"
+              value={editTitle}
               type="text"
               placeholder="Title..."
               required
               onChange={(e) => setEditTitle(e.target.value)}
-              value={editTitle}
             />
           </div>
           <div>

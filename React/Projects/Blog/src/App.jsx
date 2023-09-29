@@ -27,81 +27,45 @@ function App() {
   const { width } = useWindowResize();
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await api.get("/posts");
-        setPosts(response.data);
-      } catch (error) {
-        setFetchError(error.message);
-      }
-    };
-    fetchPosts();
+    const listsPost = JSON.parse(localStorage.getItem("blog")) || [];
+    setPosts(listsPost);
   }, []);
 
-  useEffect(() => {
-    const listsPost = posts;
-    setPosts(listsPost);
-  }, [posts, search]);
-
-  const handleDelete = async (id) => {
+  const handleDelete = (id) => {
     const list = posts.filter((post) => post.id != id);
-    try {
-      await api.delete(`/posts/${id}`);
-      navigate("/");
-      setPosts(list);
-    } catch (error) {
-      console.log(`Error: ${error.message}`);
-    }
+    localStorage.setItem("blog", JSON.stringify(list));
+    setPosts(list);
+    navigate("/");
   };
-  const handleSubmit = async (e) => {
-    console.info("");
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
-
+    console.log(id);
     const date = new Date();
     const postDate = date.toUTCString();
     const newTitle = postTitle;
     const newPost = post;
     const PostItem = { id, title: newTitle, body: newPost, datetime: postDate };
-    try {
-      const response = await api.post("/posts", PostItem);
-      const addPost = [...posts, response.data];
-      setPosts(addPost.reverse());
-      setPostTitle("");
-      setPost("");
-      navigate("/");
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.status);
-        console.log(error.headers.data);
-        console.log(error.response.data);
-      } else {
-        console.log(`Error: ${error.message}`);
-      }
-    }
+
+    const saveItem = [...posts, PostItem];
+    localStorage.setItem("blog", JSON.stringify(saveItem));
+    navigate("/");
+    setPostTitle("");
+    setPost("");
+    setPosts(saveItem);
   };
-  const handleEdit = async (id, e) => {
+  const handleEdit = (id, e) => {
     e.preventDefault();
     const date = new Date();
     const postDate = date.toUTCString();
-    const PostItem = {
-      id,
-      title: editTitle,
-      body: editBody,
-      datetime: postDate,
-    };
-
-    try {
-      const response = await api.put(`/posts/${id}`, PostItem);
-      setPosts(
-        posts.map((post) => (post.id == id ? { ...response.data } : post))
-      );
-      setEditBody("");
-      setEditTitle("");
-      navigate("/");
-    } catch (error) {
-      console.log(`Error: ${error.message}`);
-    }
+    const itemToEdit = posts.filter((item) => item.id == id);
+    itemToEdit[0].title = editTitle;
+    itemToEdit[0].body = editBody;
+    itemToEdit[0].datetime = postDate;
+    localStorage.setItem("blog", JSON.stringify(posts));
+    navigate("/");
+    setPosts(posts);
   };
 
   return (
