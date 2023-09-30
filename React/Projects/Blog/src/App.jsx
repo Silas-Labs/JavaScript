@@ -70,65 +70,69 @@ function App() {
 
   return (
     <div className="App">
-      <Header
-        title="ReactJS Blog"
-        search={search}
-        setSearch={setSearch}
-        width={width}
-      />
-      <Nav search={search} setSearch={setSearch} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              fetchError={fetchError}
-              posts={
-                !search
-                  ? posts
-                  : posts.filter(
-                      (item) =>
-                        item.body
-                          .toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        item.title.toLowerCase().includes(search.toLowerCase())
-                    )
-              }
-            />
-          }
+      <div id="body">
+        <Header
+          title="ReactJS-powered Blog"
+          search={search}
+          setSearch={setSearch}
+          width={width}
         />
-        <Route
-          path="posts"
-          element={
-            <NewPost
-              handleSubmit={handleSubmit}
-              post={post}
-              setPost={setPost}
-              title={postTitle}
-              setPostTitle={setPostTitle}
-            />
-          }
-        />
-        <Route
-          path="posts/edit/:id"
-          element={
-            <EditPost
-              editBody={editBody}
-              setEditBody={setEditBody}
-              editTitle={editTitle}
-              setEditTitle={setEditTitle}
-              handleEdit={handleEdit}
-              posts={posts}
-            />
-          }
-        />
-        <Route
-          path="post/:id"
-          element={<PostPage posts={posts} handleDelete={handleDelete} />}
-        />
-        <Route path="about" Component={About} />
-        <Route path="*" Component={Missing} />
-      </Routes>
+        <Nav search={search} setSearch={setSearch} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                fetchError={fetchError}
+                posts={
+                  !search
+                    ? posts
+                    : posts.filter(
+                        (item) =>
+                          item.body
+                            .toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item.title
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                      )
+                }
+              />
+            }
+          />
+          <Route
+            path="posts"
+            element={
+              <NewPost
+                handleSubmit={handleSubmit}
+                post={post}
+                setPost={setPost}
+                title={postTitle}
+                setPostTitle={setPostTitle}
+              />
+            }
+          />
+          <Route
+            path="posts/edit/:id"
+            element={
+              <EditPost
+                editBody={editBody}
+                setEditBody={setEditBody}
+                editTitle={editTitle}
+                setEditTitle={setEditTitle}
+                handleEdit={handleEdit}
+                posts={posts}
+              />
+            }
+          />
+          <Route
+            path="post/:id"
+            element={<PostPage posts={posts} handleDelete={handleDelete} />}
+          />
+          <Route path="about" Component={About} />
+          <Route path="*" Component={Missing} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
