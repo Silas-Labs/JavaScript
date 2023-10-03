@@ -23,6 +23,7 @@ function App() {
   }, []);
 
   const onSubmit = (e) => {
+    //Submitting new item
     e.preventDefault();
     if (!newItem) return;
     addItem(newItem);
