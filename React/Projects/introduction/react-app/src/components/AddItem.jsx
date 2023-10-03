@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa";
 function AddItem({ onSubmit, setNewItem, newItem }) {
   const inputRef = useRef();
   return (
-    <form className="container" onSubmit={(e) => onSubmit}>
+    <form className="container" onSubmit={onSubmit}>
       <input
         type="text"
         autoFocus

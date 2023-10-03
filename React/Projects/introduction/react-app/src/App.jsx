@@ -9,16 +9,14 @@ import apiRequest from "./components/apiRequest.jsx";
 function App() {
   const API_URL = "http://localhost:3000/items";
 
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("shoppinglist")) || []
-  );
+  const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [searchItem, setSearchItem] = useState("");
   const [fetchError, setFetchError] = useState("");
   const [fetchErrorDetails, setFetchErrorDetails] = useState("");
 
   useEffect(() => {
-    const list = JSON.parse(localStorage.getItem("shoppinglist"));
+    const list = JSON.parse(localStorage.getItem("shoppinglist")) || [];
     setItems(list);
   }, []);
 
