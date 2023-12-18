@@ -6,6 +6,7 @@ function ListGroup({
   onClickDelete,
   fetchError,
   fetchErrorDetails,
+  loadedDate,
 }) {
   return (
     <>
@@ -41,8 +42,14 @@ function ListGroup({
               </ul>
             ))}
           </main>
+        ) : loadedDate ? (
+          <span id="emptyList" style={{ color: "red" }}>
+            No ToDos for Selected Date
+          </span>
         ) : (
-          <span id="emptyList">No Items in List</span>
+          <span style={{ color: "rgb(127, 9, 173)" }} id="emptyList">
+            Select Date to View ToDos
+          </span>
         )
       ) : (
         <div className="accordion-item">

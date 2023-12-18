@@ -1,0 +1,156 @@
+import Header from "./components/Header.jsx";
+import ListGroup from "./components/ListGroup.jsx";
+import Footer from "./components/Footer.jsx";
+import Search from "./components/Search.jsx";
+import { useState, useEffect } from "react";
+import AddItem from "./components/AddItem.jsx";
+import apiRequest from "./components/apiRequest.jsx";
+import ViewOlder from "./components/ViewOlder.jsx";
+import ViewFuture from "./components/ViewFuture.jsx";
+
+//////
+// [{"12/12/2023":[{"id":3,"item":"Nuts and Peas","checked":false},{"id":4,"item":"Honey","checked":false},{"id":5,"item":"Milk","checked":false},{"id":6,"item":"Cheese","checked":false},{"id":7,"item":"Biscuits","checked":false}]}]
+/////
+
+function App() {
+  const API_URL = "http://localhost:3000/items";
+
+  const [items, setItems] = useState([]);
+  const [newItem, setNewItem] = useState("");
+  const [searchItem, setSearchItem] = useState("");
+  const [fetchError, setFetchError] = useState("");
+  const [fetchErrorDetails, setFetchErrorDetails] = useState("");
+
+  const [dateSelectPast, setdateSelectPast] = useState(false);
+  const [dateSelectFuture, setdateSelectFuture] = useState(false);
+  const [allItems, setAllItems] = useState([]);
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    // const list = JSON.parse(localStorage.getItem("datedToDo")) || [];
+    // setItems(list);
+    const date = new Date();
+    const today =
+      date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+
+    const list = JSON.parse(localStorage.getItem("datedToDo")) || [];
+    console.log(list[today]);
+    setAllItems(list);
+    setItems(list[today] || []);
+    // setItems(list);
+  }, []);
+
+  const handleOlder = () => {};
+
+  const onSubmit = (e) => {
+    //Submitting new item
+    e.preventDefault();
+    if (!newItem) return;
+    addItem(newItem);
+    setNewItem("");
+  };
+
+  const saveToStorage = (listItem) => {
+    //localStorage.setItem("shoppinglist", JSON.stringify(listItem));
+    //localStorage.setItem("datedToDo", JSON.stringify(listItem));
+    //console.log(listItem);
+    //setItems(listItem);
+  };
+
+  const addItem = async (item) => {
+    /**
+     *  const id = items.length ? items[items.length - 1].id + 1 : 1;
+     *  const myNewItem = { id, item, checked: false };
+     *  const listItem = [...items, myNewItem];
+     *  saveToStorage(listItem);
+     */
+    const date = new Date();
+    const today =
+      date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+
+    const myNewItem = { [today]: { id, item, checked: false } };
+    const listItem = [...items, myNewItem];
+    //saveToStorage(listItem);
+    console.log(items, today);
+  };
+
+  const onCheck = async (id) => {
+    const listItem = items.map((item) =>
+      item.id == id ? { ...item, checked: !item.checked } : item
+    );
+    saveToStorage(listItem);
+  };
+
+  const onDelete = async (id) => {
+    // const listItem = items.filter((item) => item.id != id);
+    // saveToStorage(listItem);
+  };
+
+  const loadOlder = async () => {
+    setdateSelectPast(true);
+  };
+
+  const loadCurrent = async () => {
+    setdateSelectPast(false);
+    setdateSelectFuture(false);
+    const date = new Date();
+    const today =
+      date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+
+    const list = allItems[today];
+    setItems(list || []);
+  };
+
+  const loadFuture = async () => {
+    setdateSelectFuture(true);
+    setdateSelectPast(false);
+  };
+  const loadDate = async (date) => {
+    const list = allItems[date.item];
+    setItems(list);
+    setdateSelectPast(false);
+    setdateSelectFuture(false);
+  };
+
+  return (
+    <div className="App">
+      <Header />
+      <span id="timeline">
+        <small id="previous" onClick={loadOlder}>
+          &lt;&lt; View Older
+        </small>
+        <small id="current" onClick={loadCurrent}>
+          Today
+        </small>
+        <small id="future" onClick={loadFuture}>
+          View Future&gt;&gt;
+        </small>
+      </span>
+      <AddItem onSubmit={onSubmit} setNewItem={setNewItem} newItem={newItem} />
+      <Search
+        //Search={onSearch}
+        setSearchItem={setSearchItem}
+        searchItem={searchItem}
+      />
+      {dateSelectPast ? (
+        <ViewOlder allItems={allItems} loadDate={loadDate} />
+      ) : dateSelectFuture ? (
+        <ViewFuture allItems={allItems} loadDate={loadDate} />
+      ) : (
+        <ListGroup
+          onClickCheck={onCheck}
+          onClickDelete={onDelete}
+          items={items.filter((item) =>
+            item.item.toLowerCase().includes(searchItem.toLowerCase())
+          )}
+          fetchError={fetchError}
+          fetchErrorDetails={fetchErrorDetails}
+        />
+      )}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
